@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 
     dynamodbClient.update(params, function (err, data) {
         if (err) {
-            console.log("Working in %s on table %s", process.env.AWS_REGION, process.env.DYNAMODB_DEMO_TABLE);
+            console.log("Working in region %s on table %s", process.env.AWS_REGION, process.env.DYNAMODB_DEMO_TABLE);
             console.log(JSON.stringify(err, undefined, 2));
             res.send('Error reaching dynamodb');
         } else {
