@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
         },
         UpdateExpression: "set counter_count = counter_count + :val",
         ExpressionAttributeValues: {
-            ":val": 1
+            ":val": 2
         },
         ReturnValues: "UPDATED_NEW"
     };
