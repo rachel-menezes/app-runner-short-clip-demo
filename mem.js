@@ -49,6 +49,8 @@ function allocToMax () {
         //console.log(`Total allocated       ${Math.round(mbNow * 100) / 100} GB`);
         console.log(`Allocated since start ${Math.round((mbNow - gbStart) * 100) / 100} GB`);
 
+        if ( mbNow > 5 ) break;
+
         // Infinite loop, never get here.
     }
 
