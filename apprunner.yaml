@@ -10,7 +10,7 @@ build:
       - echo "$NODE_ENV"
     build:
       - faileBuild ; echo "build"
-      - echo "inbuild" && npm install && node --max-old-space-size=6000 mem.js && free -m
+      - echo "inbuild" && npm install && node --max-old-space-size=6000 mem.js
     post-build:
       - failePostBuild ; echo "post-build" ; free -m
       - echo "post build"
