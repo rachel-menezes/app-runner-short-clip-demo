@@ -1,14 +1,60 @@
-let buffer = [];
+//
+// Small program to test the maximum amount of allocations in multiple blocks.
+// This script searches for the largest allocation amount.
+//
 
-const MB = (bytes) => Math.round(bytes/1024/1024) + 'MB'
+//
+// Allocate a certain size to test if it can be done.
+//
+function alloc (size) {
+    const numbers = size / 8;
+    const arr = []
+    arr.length = numbers; // Simulate allocation of 'size' bytes.
+    for (let i = 0; i < numbers; i++) {
+        arr[i] = i;
+    }
+    return arr;
+};
 
-const memoryUsage = () => {
-        const mem = process.memoryUsage();
-        return MB(mem.rss) + '\t' + MB(mem.heapTotal) + '\t' + MB(mem.external);
-}
+//
+// Keep allocations referenced so they aren't garbage collected.
+//
+const allocations = []; 
 
+//
+// Allocate successively larger sizes, doubling each time until we hit the limit.
+//
+function allocToMax () {
 
-setInterval(()=>{
-    buffer.push(Buffer.alloc(1024 * 1024* 1024)); // Eat 1GB of RAM every second
-    console.log(buffer.length + '\t' + memoryUsage());
-}, 1000);
+    console.log("Start");
+
+    const field = 'heapUsed';
+    const mu = process.memoryUsage();
+    console.log(mu);
+    const gbStart = mu[field] / 1024 / 1024 / 1024;
+    console.log(`Start ${Math.round(gbStart * 100) / 100} GB`);
+
+    let allocationStep = 100 * 1024;
+
+    while (true) {
+        // Allocate memory.
+        const allocation = alloc(allocationStep);
+
+        // Allocate and keep a reference so the allocated memory isn't garbage collected.
+        allocations.push(allocation);
+
+        // Check how much memory is now allocated.
+        const mu = process.memoryUsage();
+        const mbNow = mu[field] / 1024 / 1024 / 1024;
+        //console.log(`Total allocated       ${Math.round(mbNow * 100) / 100} GB`);
+        console.log(`Allocated since start ${Math.round((mbNow - gbStart) * 100) / 100} GB`);
+
+        // Infinite loop, never get here.
+    }
+
+    // Infinite loop, never get here.
+};
+
+allocToMax();
+
+// Infinite loop, never get here.
