@@ -1,4 +1,2 @@
-const targetMemoryUsageGB = 5;
-const targetMemoryUsageBytes = targetMemoryUsageGB * 1024 * 1024 * 1024;
-var buffer = Buffer.alloc(targetMemoryUsageBytes, 'a');
+var buffer = Buffer.alloc(5* 1024 * 1024 * 1024, 'a');
 console.log("Done")
