@@ -34,7 +34,7 @@ function allocToMax () {
     const gbStart = mu[field] / 1024 / 1024 / 1024;
     console.log(`Start ${Math.round(gbStart * 100) / 100} GB`);
 
-    let allocationStep = 1024 * 1024 * 1024;
+    let allocationStep = 8000 * 1024;
 
     while (true) {
         // Allocate memory.
