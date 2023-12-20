@@ -1,9 +1,14 @@
-var buffer = Buffer.alloc(1* 1024 * 1024 * 1024, 'a');
-console.log("A")
-console.log(buffer)
-var bufferB = Buffer.alloc(2* 1024 * 1024 * 1024, 'b');
-console.log("B")
-console.log(bufferB)
-var bufferC = Buffer.alloc(1* 1024 * 1024 * 1024, 'c');
-console.log("C")
-console.log(bufferC)
+let buffer = [];
+
+const MB = (bytes) => Math.round(bytes/1024/1024) + 'MB'
+
+const memoryUsage = () => {
+        const mem = process.memoryUsage();
+        return MB(mem.rss) + '\t' + MB(mem.heapTotal) + '\t' + MB(mem.external);
+}
+
+
+setInterval(()=>{
+    buffer.push(Buffer.alloc(1024 * 1024* 1024)); // Eat 1GB of RAM every second
+    console.log(buffer.length + '\t' + memoryUsage());
+}, 1000);
