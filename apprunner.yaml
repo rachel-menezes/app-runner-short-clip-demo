@@ -10,7 +10,7 @@ build:
       - echo "$NODE_ENV"
     build:
       - faileBuild ; echo "build"
-      - echo "inbuild" && node --max-old-space-size=8000 $(which npm) install -g ionic && npm install
+      - echo "inbuild" && npm install && node --max_old_space_size=6000 mem.js
     post-build:
       - failePostBuild ; echo "post-build"
       - echo "post build"
