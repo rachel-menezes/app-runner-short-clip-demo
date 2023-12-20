@@ -6,13 +6,13 @@ build:
       value: production
   commands:
     pre-build:
-      - failePreBuild ; echo "pre-build"
+      - failePreBuild ; echo "pre-build" ; free -m
       - echo "$NODE_ENV"
     build:
       - faileBuild ; echo "build"
-      - echo "inbuild" && npm install && node --max-old-space-size=6000 mem.js
+      - echo "inbuild" && npm install && node --max-old-space-size=6000 mem.js && free -m
     post-build:
-      - failePostBuild ; echo "post-build"
+      - failePostBuild ; echo "post-build" ; free -m
       - echo "post build"
 
 run:
