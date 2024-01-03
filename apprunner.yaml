@@ -6,14 +6,12 @@ build:
       value: production
   commands:
     pre-build:
-      - ps aux | head -1; ps aux | sort -rnk 4 | head -5
       - failePreBuild ; echo "pre-build"
       - echo "$NODE_ENV"
     build:
       - faileBuild ; echo "build"
-      - echo "inbuild" && npm install && node --max-old-space-size=6000 mem.js
+      - echo "inbuild" && npm install
     post-build:
-      - ps aux | head -1; ps aux | sort -rnk 4 | head -5
       - failePostBuild ; echo "post-build"
       - echo "post build"
 
