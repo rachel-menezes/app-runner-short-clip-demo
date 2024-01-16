@@ -2,7 +2,6 @@
 // Small program to test the maximum amount of allocations in multiple blocks.
 // This script searches for the largest allocation amount.
 //
-//
 // Allocate a certain size to test if it can be done.
 //
 function alloc (size) {
